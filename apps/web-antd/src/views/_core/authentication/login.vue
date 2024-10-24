@@ -13,6 +13,21 @@ defineOptions({ name: 'Login' });
 
 const authStore = useAuthStore();
 
+const MOCK_TENANT_OPTIONS: BasicOption[] = [
+  {
+    label: 'XXX科技有限公司',
+    value: 'tech',
+  },
+  {
+    label: 'XXX设备有限公司',
+    value: 'device',
+  },
+  {
+    label: 'XXX集团有限公司',
+    value: 'group',
+  },
+];
+
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
     label: 'Super',
@@ -32,6 +47,54 @@ const formSchema = computed((): VbenFormSchema[] => {
   return [
     {
       component: 'VbenSelect',
+      // componentProps(_values, form) {
+      //   return {
+      //     'onUpdate:modelValue': (value: string) => {
+      //       const findItem = MOCK_USER_OPTIONS.find(
+      //         (item) => item.value === value,
+      //       );
+      //       if (findItem) {
+      //         form.setValues({
+      //           password: '123456',
+      //           username: findItem.label,
+      //         });
+      //       }
+      //     },
+      //     options: MOCK_USER_OPTIONS,
+      //     placeholder: $t('authentication.selectAccount'),
+      //   };
+      // },
+      componentProps: {
+        options: MOCK_TENANT_OPTIONS,
+        placeholder: $t('authentication.selectTenant'),
+      },
+      fieldName: 'selectTenant',
+      label: $t('authentication.selectTenant'),
+      rules: z
+        .string()
+        .min(1, { message: $t('authentication.selectTenant') })
+        .optional()
+        .default('tech'),
+    },
+    {
+      component: 'VbenSelect',
+      // componentProps(_values, form) {
+      //   return {
+      //     'onUpdate:modelValue': (value: string) => {
+      //       const findItem = MOCK_USER_OPTIONS.find(
+      //         (item) => item.value === value,
+      //       );
+      //       if (findItem) {
+      //         form.setValues({
+      //           password: '123456',
+      //           username: findItem.label,
+      //         });
+      //       }
+      //     },
+      //     options: MOCK_USER_OPTIONS,
+      //     placeholder: $t('authentication.selectAccount'),
+      //   };
+      // },
       componentProps: {
         options: MOCK_USER_OPTIONS,
         placeholder: $t('authentication.selectAccount'),

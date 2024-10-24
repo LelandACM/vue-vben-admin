@@ -1,12 +1,14 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 import {
+  VBEN_ANT_PREVIEW_URL,
   VBEN_DOC_URL,
   VBEN_ELE_PREVIEW_URL,
   VBEN_GITHUB_URL,
   VBEN_LOGO_URL,
   VBEN_NAIVE_PREVIEW_URL,
 } from '@vben/constants';
+import { SvgAntdvLogoIcon } from '@vben/icons';
 
 import { BasicLayout, IFrameView } from '#/layouts';
 import { $t } from '#/locales';
@@ -50,6 +52,17 @@ const routes: RouteRecordRaw[] = [
           icon: 'mdi:github',
           link: VBEN_GITHUB_URL,
           title: 'Github',
+        },
+      },
+      {
+        name: 'VbenAntdv',
+        path: '/vben-admin/antdv',
+        component: IFrameView,
+        meta: {
+          badgeType: 'dot',
+          icon: SvgAntdvLogoIcon,
+          link: VBEN_ANT_PREVIEW_URL,
+          title: $t('demos.vben.antdv'),
         },
       },
       {

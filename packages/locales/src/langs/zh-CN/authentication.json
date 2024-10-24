@@ -5,6 +5,7 @@
   "loginSuccess": "登录成功",
   "loginSuccessDesc": "欢迎回来",
   "loginSubtitle": "请输入您的帐户信息以开始管理您的项目",
+  "selectTenant": "请选择租户",
   "selectAccount": "快速选择账号",
   "username": "账号",
   "password": "密码",
