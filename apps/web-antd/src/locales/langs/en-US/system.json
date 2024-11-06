@@ -1,0 +1,10 @@
+{
+  "title": "System",
+  "page": {
+    "user": "User",
+    "dept": "Dept",
+    "role": "Role",
+    "menu": "Menu",
+    "log": "Log"
+  }
+}
