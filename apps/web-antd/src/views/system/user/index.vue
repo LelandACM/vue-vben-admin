@@ -1,8 +1,4 @@
-<script lang="ts" setup>
-import { getOne } from './user.api';
-
-await getOne();
-</script>
+<script lang="ts" setup></script>
 <template>
   <div>用户管理</div>
 </template>
