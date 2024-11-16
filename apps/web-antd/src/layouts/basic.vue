@@ -105,6 +105,7 @@ function handleNoticeClear() {
 function handleMakeAll() {
   notifications.value.forEach((item) => (item.isRead = true));
 }
+
 watch(
   () => preferences.app.watermark,
   async (enable) => {
