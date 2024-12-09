@@ -6,7 +6,39 @@ export interface UserInfo {
   username: string;
 }
 
+export interface UserVO {
+  id: number;
+  password: string;
+  realName: string;
+  roles: string[];
+  username: string;
+}
+
 export const MOCK_USERS: UserInfo[] = [
+  {
+    id: 0,
+    password: '123456',
+    realName: 'Vben',
+    roles: ['super'],
+    username: 'vben',
+  },
+  {
+    id: 1,
+    password: '123456',
+    realName: 'Admin',
+    roles: ['admin'],
+    username: 'admin',
+  },
+  {
+    id: 2,
+    password: '123456',
+    realName: 'Jack',
+    roles: ['user'],
+    username: 'jack',
+  },
+];
+
+export const MOCK_USERS_VO: UserVO[] = [
   {
     id: 0,
     password: '123456',

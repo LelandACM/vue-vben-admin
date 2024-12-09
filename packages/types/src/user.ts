@@ -17,4 +17,21 @@ interface UserInfo extends BasicUserInfo {
   token: string;
 }
 
-export type { UserInfo };
+/** 用户信息 */
+interface UserVO extends BasicUserInfo {
+  /**
+   * 用户描述
+   */
+  desc: string;
+  /**
+   * 首页地址
+   */
+  homePath: string;
+
+  /**
+   * accessToken
+   */
+  token: string;
+}
+
+export type { UserInfo, UserVO };

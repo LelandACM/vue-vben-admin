@@ -1,10 +1,10 @@
-import type { PostVO } from '../post/types';
-import type { RoleVO } from '../role/types';
+import type { PostVO } from './post.types';
+import type { RoleVO } from './role.types';
 /**
  * 用户查询对象类型
  */
 export interface UserQuery extends PageQuery {
-  userName?: string;
+  username?: string;
   phonenumber?: string;
   status?: string;
   deptId?: number | string;
@@ -18,7 +18,7 @@ export interface UserVO extends BaseEntity {
   userId: number | string;
   tenantId: string;
   deptId: number;
-  userName: string;
+  username: string;
   nickName: string;
   userType: string;
   email: string;
@@ -54,7 +54,7 @@ export interface UserForm {
   id?: string;
   userId?: string;
   deptId?: number;
-  userName: string;
+  username: string;
   nickName?: string;
   password: string;
   phonenumber?: string;
