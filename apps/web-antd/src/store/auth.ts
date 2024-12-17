@@ -9,7 +9,13 @@ import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
-import { getCaptchaApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
+import {
+  getAccessCodesApi,
+  getCaptchaApi,
+  getUserInfoApi,
+  loginApi,
+  logoutApi,
+} from '#/api';
 import { $t } from '#/locales';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -30,7 +36,6 @@ export const useAuthStore = defineStore('auth', () => {
     onSuccess?: () => Promise<void> | void,
   ) {
     // 异步处理用户登录操作并获取 accessToken
-    const userInfo: null | UserInfo = null;
     try {
       const newParam = {
         clientId: 'e5cd7e4891bf95d1d19206ce24a7b32e',
@@ -45,9 +50,13 @@ export const useAuthStore = defineStore('auth', () => {
       if (access_token) {
         accessStore.setAccessToken(access_token);
         // 获取用户信息并存储到 accessStore 中
-        const userInfo = await fetchUserInfo();
+        // 获取用户信息并存储到 accessStore 中
+        const [userInfo, accessCodes] = await Promise.all([
+          fetchUserInfo(),
+          getAccessCodesApi(),
+        ]);
         userStore.setUserInfo(userInfo);
-        accessStore.setAccessCodes([]);
+        accessStore.setAccessCodes(accessCodes);
 
         if (accessStore.loginExpired) {
           accessStore.setLoginExpired(false);
@@ -56,10 +65,9 @@ export const useAuthStore = defineStore('auth', () => {
             ? await onSuccess?.()
             : await router.push(userInfo.homePath || DEFAULT_HOME_PATH);
         }
-
-        if (userInfo?.realName) {
+        if (userInfo?.nickname) {
           notification.success({
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
+            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.nickname}`,
             duration: 3,
             message: $t('authentication.loginSuccess'),
           });
@@ -98,12 +106,11 @@ export const useAuthStore = defineStore('auth', () => {
         : {},
     });
   }
-
   async function fetchUserInfo() {
     let userInfo: null | UserInfo = null;
     userInfo = await getUserInfoApi();
-    userStore.setUserInfo(userInfo);
-    return userInfo;
+    userStore.setUserInfo(userInfo.user);
+    return userInfo.user;
   }
 
   function $reset() {
