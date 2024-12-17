@@ -22,6 +22,8 @@
   "signUpSubtitle": "Make managing your applications simple and fun",
   "confirmPassword": "Confirm Password",
   "confirmPasswordTip": "The passwords do not match",
+  "captcha": "Captcha",
+  "captchaTip": "Please enter the verification code",
   "agree": "I agree to",
   "privacyPolicy": "Privacy-policy",
   "terms": "Terms",

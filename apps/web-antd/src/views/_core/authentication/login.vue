@@ -2,7 +2,7 @@
 import type { VbenFormSchema } from '@vben/common-ui';
 import type { BasicOption } from '@vben/types';
 
-import { computed, markRaw } from 'vue';
+import { computed, h, markRaw, ref } from 'vue';
 
 import { AuthenticationLogin, SliderCaptcha, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
@@ -12,6 +12,9 @@ import { useAuthStore } from '#/store';
 defineOptions({ name: 'Login' });
 
 const authStore = useAuthStore();
+
+const base64 = ref<any>('');
+const uuid = ref<any>('');
 
 const MOCK_TENANT_OPTIONS: BasicOption[] = [
   {
@@ -105,7 +108,7 @@ const formSchema = computed((): VbenFormSchema[] => {
         .string()
         .min(1, { message: $t('authentication.selectAccount') })
         .optional()
-        .default('vben'),
+        .default('admin'),
     },
     {
       component: 'VbenInput',
@@ -120,7 +123,7 @@ const formSchema = computed((): VbenFormSchema[] => {
             );
             if (findUser) {
               form.setValues({
-                password: '123456',
+                password: 'admin123',
                 username: findUser.value,
               });
             }
@@ -142,6 +145,50 @@ const formSchema = computed((): VbenFormSchema[] => {
       rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
     },
     {
+      component: 'VbenInput',
+      componentProps(_values, form) {
+        return {
+          'onUpdate:modelValue': (_value: string) => {
+            form.setValues({
+              uuid: uuid.value,
+            });
+          },
+          placeholder: $t('authentication.captcha'),
+        };
+      },
+      fieldName: 'code',
+      label: $t('authentication.captcha'),
+      rules: z.string().min(1, { message: $t('authentication.captchaTip') }),
+      suffix: () => {
+        return h(
+          'div',
+          {
+            class: 'flex h-[38px]',
+          },
+          [
+            h('div', {
+              class: 'w-[100px] h-[100%] rounded-r-[10px]',
+              style: {
+                backgroundImage: `url(${base64.value})`,
+                backgroundSize: '100% 100%',
+              },
+              onClick: () => {
+                fetchCaptcha();
+              },
+            }),
+          ],
+        );
+      },
+    },
+    {
+      component: 'VbenInput',
+      fieldName: 'uuid',
+      dependencies: {
+        show: false,
+        triggerFields: ['uuid'],
+      },
+    },
+    {
       component: markRaw(SliderCaptcha),
       fieldName: 'captcha',
       rules: z.boolean().refine((value) => value, {
@@ -150,6 +197,14 @@ const formSchema = computed((): VbenFormSchema[] => {
     },
   ];
 });
+
+async function fetchCaptcha() {
+  const res = await authStore.fetchCaptcha();
+  base64.value = res.img;
+  uuid.value = res.uuid;
+}
+
+fetchCaptcha();
 </script>
 
 <template>

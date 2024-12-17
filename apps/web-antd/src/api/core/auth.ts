@@ -31,7 +31,7 @@ export namespace AuthApi {
 
   /** 登录接口返回值 */
   export interface LoginResult {
-    accessToken: string;
+    access_token: string;
   }
 
   export interface RefreshTokenResult {
@@ -54,6 +54,13 @@ export async function refreshTokenApi() {
   return baseRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
     withCredentials: true,
   });
+}
+
+/**
+ * 获取验证码
+ */
+export async function getCaptchaApi() {
+  return requestClient.get('/auth/code');
 }
 
 /**

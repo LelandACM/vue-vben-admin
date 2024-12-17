@@ -9,7 +9,13 @@ import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
-import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
+import {
+  getAccessCodesApi,
+  getCaptchaApi,
+  getUserInfoApi,
+  loginApi,
+  logoutApi,
+} from '#/api';
 import { $t } from '#/locales';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -32,19 +38,23 @@ export const useAuthStore = defineStore('auth', () => {
     // 异步处理用户登录操作并获取 accessToken
     let userInfo: null | UserInfo = null;
     try {
+      const newParam = {
+        clientId: 'e5cd7e4891bf95d1d19206ce24a7b32e',
+        grantType: 'password',
+        tenantId: '000000',
+        ...params,
+      };
       loginLoading.value = true;
-      const { accessToken } = await loginApi(params);
+      const { access_token } = await loginApi(newParam);
 
       // 如果成功获取到 accessToken
-      if (accessToken) {
-        accessStore.setAccessToken(accessToken);
-
+      if (access_token) {
+        accessStore.setAccessToken(access_token);
         // 获取用户信息并存储到 accessStore 中
         const [fetchUserInfoResult, accessCodes] = await Promise.all([
           fetchUserInfo(),
           getAccessCodesApi(),
         ]);
-
         userInfo = fetchUserInfoResult;
 
         userStore.setUserInfo(userInfo);
@@ -73,6 +83,10 @@ export const useAuthStore = defineStore('auth', () => {
     return {
       userInfo,
     };
+  }
+
+  async function fetchCaptcha() {
+    return await getCaptchaApi();
   }
 
   async function logout(redirect: boolean = true) {
@@ -112,6 +126,7 @@ export const useAuthStore = defineStore('auth', () => {
     authLogin,
     fetchUserInfo,
     loginLoading,
+    fetchCaptcha,
     logout,
   };
 });

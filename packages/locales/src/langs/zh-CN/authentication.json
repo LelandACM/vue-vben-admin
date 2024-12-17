@@ -22,6 +22,8 @@
   "signUpSubtitle": "让您的应用程序管理变得简单而有趣",
   "confirmPassword": "确认密码",
   "confirmPasswordTip": "两次输入的密码不一致",
+  "captcha": "验证码",
+  "captchaTip": "请输入验证码",
   "agree": "我同意",
   "privacyPolicy": "隐私政策",
   "terms": "条款",
