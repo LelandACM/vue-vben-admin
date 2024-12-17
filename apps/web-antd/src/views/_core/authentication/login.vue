@@ -151,6 +151,7 @@ const formSchema = computed((): VbenFormSchema[] => {
           'onUpdate:modelValue': (_value: string) => {
             form.setValues({
               uuid: uuid.value,
+              code: _value,
             });
           },
           placeholder: $t('authentication.captcha'),

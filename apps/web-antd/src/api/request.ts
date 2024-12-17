@@ -62,9 +62,9 @@ function createRequestClient(baseURL: string) {
   client.addRequestInterceptor({
     fulfilled: async (config) => {
       const accessStore = useAccessStore();
-
       config.headers.Authorization = formatToken(accessStore.accessToken);
       config.headers['Accept-Language'] = preferences.app.locale;
+      config.headers.clientId = 'e5cd7e4891bf95d1d19206ce24a7b32e';
       return config;
     },
   });
