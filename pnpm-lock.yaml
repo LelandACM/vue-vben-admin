@@ -545,17 +545,10 @@ importers:
         version: link:scripts/vsh
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-<<<<<<< HEAD
         version: 5.2.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.1)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.3))
       '@vitejs/plugin-vue-jsx':
         specifier: 'catalog:'
         version: 4.1.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.1)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.3))
-=======
-        version: 5.2.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.3))
-      '@vitejs/plugin-vue-jsx':
-        specifier: 'catalog:'
-        version: 4.1.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.3))
->>>>>>> 2fdf1d2933cfa0030abedb04854fff6cf61f36ad
       '@vue/test-utils':
         specifier: 'catalog:'
         version: 2.4.6
@@ -600,11 +593,7 @@ importers:
         version: 3.0.1(sass@1.83.0)(typescript@5.6.3)(vue-tsc@2.1.10(typescript@5.6.3))(vue@3.5.13(typescript@5.6.3))
       vite:
         specifier: 'catalog:'
-<<<<<<< HEAD
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.1)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)(yaml@2.6.1)
-=======
-        version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)(yaml@2.6.1)
->>>>>>> 2fdf1d2933cfa0030abedb04854fff6cf61f36ad
       vitest:
         specifier: 'catalog:'
         version: 2.1.8(@types/node@22.10.2)(happy-dom@15.11.7)(less@4.2.1)(sass@1.83.0)(terser@5.36.0)
