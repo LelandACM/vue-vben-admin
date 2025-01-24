@@ -85,7 +85,6 @@ export const MOCK_CODES = [
 
 const dashboardMenus = [
   {
-    component: 'BasicLayout',
     meta: {
       order: -1,
       title: 'page.dashboard.title',
@@ -148,7 +147,6 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
 
   return [
     {
-      component: 'BasicLayout',
       meta: {
         icon: 'ic:baseline-view-in-ar',
         keepAlive: true,

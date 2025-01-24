@@ -6,7 +6,7 @@ import { UserRoundPen } from '@vben/icons';
 import { $t } from '@vben/locales';
 import { BUILT_IN_THEME_PRESETS } from '@vben/preferences';
 import { convertToHsl, TinyColor } from '@vben/utils';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 defineOptions({
   name: 'PreferenceBuiltinTheme',
@@ -79,11 +79,6 @@ function typeView(name: BuiltinThemeType) {
 
 function handleSelect(theme: BuiltinThemePreset) {
   modelValue.value = theme.type;
-  const primaryColor = props.isDark
-    ? theme.darkPrimaryColor || theme.primaryColor
-    : theme.primaryColor;
-
-  themeColorPrimary.value = primaryColor || theme.color;
 }
 
 function handleInputChange(e: Event) {
@@ -94,6 +89,22 @@ function handleInputChange(e: Event) {
 function selectColor() {
   colorInput.value?.[0]?.click?.();
 }
+
+watch(
+  () => [modelValue.value, props.isDark] as [BuiltinThemeType, boolean],
+  ([themeType, isDark]) => {
+    const theme = builtinThemePresets.value.find(
+      (item) => item.type === themeType,
+    );
+    if (theme) {
+      const primaryColor = isDark
+        ? theme.darkPrimaryColor || theme.primaryColor
+        : theme.primaryColor;
+
+      themeColorPrimary.value = primaryColor || theme.color;
+    }
+  },
+);
 </script>
 
 <template>
